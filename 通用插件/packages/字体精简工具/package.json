@@ -1,0 +1,51 @@
+{
+  "name": "mini_font",
+  "version": "1.0.0",
+  "description": "字体瘦身工具",
+  "author": "林其",
+  "main": "dist/main.js",
+  "main-menu": {
+    "i18n:MAIN_MENU.package.title/字体瘦身工具": {
+      "message": "mini_font:open"
+    }
+  },
+  "reload": {
+    "test": [
+      "test/**/*",
+      "tests/**/*"
+    ],
+    "renderer": [
+      "renderer/**/*",
+      "panel/**/*"
+    ],
+    "ignore": [],
+    "main": [
+      "dist/main.js"
+    ]
+  },
+  "panel": {
+    "main": "dist/index.js",
+    "type": "dockable",
+    "title": "字体瘦身工具",
+    "width": 500,
+    "height": 700
+  },
+  "scripts": {
+    "dev": "egf build -w -ngd -f cjs -c",
+    "build": "egf build -f cjs -m -ngd -c",
+    "publish-pkg": "gulp"
+  },
+  "devDependencies": {
+    "@ailhc/egf-cli": "^1.4.1",
+    "@types/node": "^14.14.37",
+    "execa": "^5.0.0",
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
+    "jszip": "^3.6.0"
+  },
+  "dependencies": {
+    "@ailhc/egf-core": "^1.2.0",
+    "fontmin": "^0.9.8"
+  },
+  "_storeId": "5447d7360d9383b06079bcb15ef391b0"
+}
