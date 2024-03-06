@@ -1,0 +1,55 @@
+
+eff_baoxiang.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ggr
+  rotate: false
+  xy: 268, 372
+  size: 188, 100
+  orig: 188, 100
+  offset: 0, 0
+  index: -1
+img_box
+  rotate: false
+  xy: 2, 446
+  size: 264, 276
+  orig: 264, 276
+  offset: 0, 0
+  index: -1
+img_box2
+  rotate: false
+  xy: 2, 168
+  size: 264, 276
+  orig: 264, 276
+  offset: 0, 0
+  index: -1
+light1
+  rotate: false
+  xy: 268, 474
+  size: 254, 248
+  orig: 254, 248
+  offset: 0, 0
+  index: -1
+light2
+  rotate: false
+  xy: 2, 52
+  size: 218, 114
+  orig: 218, 114
+  offset: 0, 0
+  index: -1
+star
+  rotate: false
+  xy: 2, 2
+  size: 45, 48
+  orig: 45, 48
+  offset: 0, 0
+  index: -1
+xingxing
+  rotate: false
+  xy: 524, 621
+  size: 103, 101
+  orig: 103, 101
+  offset: 0, 0
+  index: -1
