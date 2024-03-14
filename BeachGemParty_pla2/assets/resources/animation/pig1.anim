@@ -1,0 +1,74 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "pig",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.5166666666666667,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "scale": [
+        {
+          "frame": 0,
+          "value": {
+            "__type__": "cc.Vec3",
+            "x": 2,
+            "y": 2,
+            "z": 1
+          }
+        }
+      ]
+    },
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "5748e2ac-88bf-4902-bbd9-cb9ff03640d5"
+            }
+          },
+          {
+            "frame": 0.08333333333333333,
+            "value": {
+              "__uuid__": "456f8be3-299f-4a96-881e-a658f9a141b8"
+            }
+          },
+          {
+            "frame": 0.16666666666666666,
+            "value": {
+              "__uuid__": "f631a44a-7e20-42f4-922d-c8bbea63d78d"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "9ae9a71e-97e2-4749-8e7c-f36837774228"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "2e455e80-98e4-4535-83a8-27366e420e30"
+            }
+          },
+          {
+            "frame": 0.4166666666666667,
+            "value": {
+              "__uuid__": "c6ad08fa-1eb4-4d8e-9e26-245a801362ff"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "de92f6f0-64b0-486b-9ff7-59b7ca420eb0"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}
