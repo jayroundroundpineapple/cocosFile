@@ -1,0 +1,67 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "scratchfinger",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1.5,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            -81.869,
+            -142.98,
+            0
+          ]
+        },
+        {
+          "frame": 0.5,
+          "value": [
+            115.923,
+            -26.817,
+            0
+          ]
+        },
+        {
+          "frame": 1,
+          "value": [
+            28.016,
+            -193.213,
+            0
+          ]
+        },
+        {
+          "frame": 1.5,
+          "value": [
+            200.691,
+            -80.189,
+            0
+          ]
+        }
+      ],
+      "opacity": [
+        {
+          "frame": 0,
+          "value": 255
+        },
+        {
+          "frame": 0.5,
+          "value": 255
+        },
+        {
+          "frame": 1,
+          "value": 255
+        },
+        {
+          "frame": 1.5,
+          "value": 255
+        }
+      ]
+    }
+  },
+  "events": []
+}
