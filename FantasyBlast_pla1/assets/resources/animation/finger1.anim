@@ -1,0 +1,70 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "finger1",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1.3333333333333333,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "props": {
+      "scale": [
+        {
+          "frame": 0,
+          "value": {
+            "__type__": "cc.Vec3",
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        },
+        {
+          "frame": 0.6666666666666666,
+          "value": {
+            "__type__": "cc.Vec3",
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        },
+        {
+          "frame": 1.3333333333333333,
+          "value": {
+            "__type__": "cc.Vec3",
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      ],
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            240,
+            -87.198,
+            0
+          ]
+        },
+        {
+          "frame": 0.6666666666666666,
+          "value": [
+            113.602,
+            -15.833,
+            0
+          ]
+        },
+        {
+          "frame": 1.3333333333333333,
+          "value": [
+            240.256,
+            -87.1,
+            0
+          ]
+        }
+      ]
+    }
+  },
+  "events": []
+}
