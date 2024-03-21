@@ -11,7 +11,7 @@ export const enum ItemType {
     green = 6
 }
 @ccclass
-export default class Ball extends cc.Component {
+export default class HorBall extends cc.Component {
     @property(cc.Node)
     private itemNode: cc.Node = null;
     @property(cc.Node)
@@ -34,8 +34,8 @@ export default class Ball extends cc.Component {
     public initItem(BallId: number, SpriteIndex: number, pos: cc.Vec2,cb: Function) {
         this.node.name = `${BallId}`
         this._spriteIndex = SpriteIndex
-        this.node.scale = 0.7
-        // this.ballLabel.string = `${BallId}`
+        this.node.scale = 1
+        this.ballLabel.string = `${BallId}`
         this._BallId = BallId
         this.system.active = false
         cc.loader.loadRes(`/ui/item/${SpriteIndex}`, cc.SpriteFrame, (error, res) => {
@@ -51,14 +51,14 @@ export default class Ball extends cc.Component {
     }
     private clickFunc(){
         cc.audioEngine.play(RESSpriteFrame.instance.clickAudioClip,false,1)
-        this.node.emit('clearEvent',this)
+        this.node.emit('HorClearEvent',this)
     }
     public setLight() {
         this.tween1 = cc.tween(this.node)
             .repeatForever(
                 cc.tween()
-                    .to(.6, { scale: .7, opacity: 50 })
-                    .to(.6, { scale: .7, opacity: 255 })
+                    .to(.6, { scale: 1, opacity: 50 })
+                    .to(.6, { scale: 1, opacity: 255 })
             )
         this.tween1.start()
     }

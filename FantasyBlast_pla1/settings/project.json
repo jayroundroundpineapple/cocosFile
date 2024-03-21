@@ -1,5 +1,5 @@
 {
-  "last-module-event-record-time": 1710230619291,
+  "last-module-event-record-time": 1710926722593,
   "group-list": [
     "default",
     "wall",
@@ -43,9 +43,7 @@
     ]
   ],
   "excluded-modules": [
-    "Collider",
     "EditBox",
-    "Physics",
     "PageView",
     "PageViewIndicator",
     "ProgressBar",

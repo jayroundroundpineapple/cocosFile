@@ -238,9 +238,9 @@ export default class Utils {
   * @param scale 缩放 
   * @param time 间隔
   */
-  public static SetScale(node: cc.Node, scale: number, time: number) {
-    let scale1 = cc.tween().to(time, { scale: scale })
-    let scale2 = cc.tween().to(time, { scale: 1 })
+  public static SetScale(node: cc.Node, startScale: number,endScale:number,time: number) {
+    let scale1 = cc.tween().to(time, { scale: startScale })
+    let scale2 = cc.tween().to(time, { scale: endScale })
     var tween = cc.tween().sequence(scale1, scale2)
     cc.tween(node).repeatForever(tween).start()
   }
