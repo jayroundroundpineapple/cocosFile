@@ -1,0 +1,37 @@
+{
+    "10001": {
+        "English": "$",
+        "Japanese": "\uffe5",
+        "French": "\u20ac",
+        "Korean": "\u20a9",
+        "German": "\u20ac"
+    },
+    "10002": {
+        "English": "Start",
+        "Japanese": "\u59cb\u3081\u308b",
+        "French": "Commencer",
+        "Korean": "\uc2dc\uc791",
+        "German": "Start"
+    },
+    "10003": {
+        "English": "Keep clicking",
+        "Japanese": "\u30af\u30ea\u30c3\u30af\u3057\u7d9a\u3051\u308b",
+        "French": "Continuez \u00e0 cliquer",
+        "Korean": "\uacc4\uc18d \ud074\ub9ad\ud558\uc138\uc694",
+        "German": "Klicken Sie weiter"
+    },
+    "10004": {
+        "English": "Congratulations!",
+        "Japanese": "\u304a\u3081\u3067\u3068\u3046\uff01",
+        "French": "Toutes nos f\u00e9licitations!",
+        "Korean": "\ucd95\ud558\ud574\uc694!",
+        "German": "Gl\u00fcckwunsch!"
+    },
+    "10005": {
+        "English": "Cash out",
+        "Japanese": "\u73fe\u91d1\u3092\u5f15\u304d\u51fa\u3059",
+        "French": "Retirer",
+        "Korean": "\ud604\uae08 \uc778\ucd9c",
+        "German": "Auszahlen"
+    }
+}
