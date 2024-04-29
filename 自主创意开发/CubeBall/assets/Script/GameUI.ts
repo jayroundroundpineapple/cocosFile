@@ -115,26 +115,31 @@ export default class GameUI extends cc.Component {
         } //移动非空试管事件 
         else if (this.cubeFlagArr[cubeId] && this.IsBallUp) {
             console.log('移动到其他试管');
-            let TargetCubeId: number = null //目标试管
+            let TargetCubeId = Number(e.target.name) //目标试管
             let TargetCubeItemArr = null
+            if(this.totalArr[TargetCubeId].length >= Ball_Max){
+                console.log('cube contained Max');
+                return;
+            }
             for (let i = 0; i < Object.keys(this.totalArr).length; i++) {
                 for (let j = this.totalArr[i].length - 1; j >= 0; j--) {
                     if (this.totalArr[i][j].isUp) {
-                        TargetCubeId = Number(e.target.name)
+                        let cubeDis = 0  //试管间隔
                         TargetCubeItemArr = this.totalArr[TargetCubeId]
                         console.log(this.totalArr[i][j].isUp, 'jayup', this.totalArr[i][j].BallSpriteId, TargetCubeItemArr[TargetCubeItemArr.length - 1].BallSpriteId);
                         if (this.totalArr[i][j].BallSpriteId == TargetCubeItemArr[TargetCubeItemArr.length - 1].BallSpriteId) {
-                            cc.tween(this.totalArr[i][j].node).delay(0.05)
-                                .to(0.15, { y: TopY }, { easing: 'quadOut' })
+                            cc.tween(this.totalArr[i][j].node).delay(0.5-0.1*j)
+                                .to(0.05*(Ball_Max-j), { y: TopY }, { easing: 'quadOut' })
                                 .call(() => {
                                     this.totalArr[i][j].node.parent = this.tubeArr[TargetCubeId]
-                                    this.totalArr[i][j].node.x = CubeGap * (i - TargetCubeId)
+                                    cubeDis = i - TargetCubeId
+                                    this.totalArr[i][j].node.x = CubeGap * cubeDis
                                     let cubeNum = this.totalArr[TargetCubeId].length
                                     this.totalArr[i][j].BallId = cubeNum
                                     this.totalArr[TargetCubeId].push(this.totalArr[i][j])
                                     cc.tween(this.totalArr[i][j].node)
-                                        .to(.35, { x: 0 }, { easing: 'quadOut' })
-                                        .to(.35, { y: BottomY + BallGap * cubeNum }, { easing: 'quadOut' })
+                                        .to(Math.abs(cubeDis)*0.12, { x: 0 }, { easing: 'quadOut' })
+                                        .to((Ball_Max-cubeNum) * 0.14, { y: BottomY + BallGap * cubeNum }, { easing: 'quadOut' })
                                         .call(() => {
                                             this.cubeFlagArr[TargetCubeId] = this.cubeFlagArr[i] = true
                                             this.totalArr[i][j].cubeId = TargetCubeId
@@ -159,7 +164,7 @@ export default class GameUI extends cc.Component {
             for (let j = this.totalArr[i].length - 1; j >= 0; j--) {
                 let TargetCubeId = Number(e.target.name)
                 if (this.totalArr[i][j].isUp) {
-                    cc.tween(this.totalArr[i][j].node).delay(1 - 0.18 * j)
+                    cc.tween(this.totalArr[i][j].node).delay(0.5-0.1*j)
                         .to(.2, { y: TopY })
                         .call(() => {
                             this.totalArr[i][j].node.parent = this.tubeArr[TargetCubeId]
