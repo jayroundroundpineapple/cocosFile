@@ -53,6 +53,7 @@ export default class GameUI extends cc.Component {
             let item = boxPrefab.getComponent(BoxItem)
             item.node.parent = this.boxBg
             let pos = new cc.Vec3(this.data[i].posX, this.data[i].posY)
+
             promises.push(item.initItem(i, this.data[i], pos, () => {
                 if (this.data[i].FirstCanClick) {
                     item.setOnLight()
@@ -60,32 +61,21 @@ export default class GameUI extends cc.Component {
                 }
                 this.itemArr.push(item)
             }))
-            // item.initItem(i, this.data[i], pos, () => {
-            //     // item.node.on('changePositon', this.changeFunc, this)
-            //     if (this.data[i].FirstCanClick) {
-            //         item.setOnLight()
-            //         item.node.on(cc.Node.EventType.TOUCH_START, this.firstClear, this)
-            //     }
-            //     this.itemArr.push(item)
-            //     if (i == keysArr.length - 1) {
-            //         this.initData()
-            //     }
-            // })
-            await Promise.all(promises)
-            if (i == keysArr.length - 1) {
-                this.initData()
-            }
         }
+        await Promise.all(promises)
+        this.itemArr = this.itemArr.sort((a,b)=>a.BoxId - b.BoxId)
+        this.initData()
     }
     private firstClear() {
+        console.log('clickjay');
         for (let i = 0; i < this.gameRow; i++) {
             for (let j = 0; j < this.gameColmun; j++) {
-                if (this.allItemArr[i][j].FirstCanClick) {
-                    this.allItemArr[i][j].spriteFrame = null
+                if (Boolean(this.allItemArr[i][j].FirstCanClick)) {
+                    this.allItemArr[i][j].getComponent(cc.Sprite).spriteFrame = null
                     this.allItemArr[i][j].ClearSystem.active = true
                     this.allItemArr[i][j].node.off(cc.Node.EventType.TOUCH_START, this.firstClear, this)
                 }
-            }
+            } 
         }
     }
     private initData() {
@@ -99,218 +89,13 @@ export default class GameUI extends cc.Component {
                     this.allItemArr[i] = {}
                 }
                 this.allItemArr[i][j] = this.itemArr[index++]
-                console.log('jay', this.allItemArr[i][j].row, this.allItemArr[i][j].colmun);
             }
         }
         console.log('jay', this.allItemArr);
     }
-
-    // private changeFunc(SelectNode, row, colmun, direction) {
-    //     let exchangeNode, SelectX, SelectY, exchangeX, exchangeY = null
-    //     //向上移动
-    //     if (direction == Direction.UP) {
-    //         exchangeNode = this.allItemArr[row - 2][colmun - 1]
-    //         SelectNode.y = SelectNode.originPosY = SelectNode.y + this.GWidth
-    //         SelectX = SelectNode.x
-    //         SelectY = SelectNode.y
-    //         SelectNode.originPosX = SelectX
-    //         exchangeNode.y = exchangeNode.originPosY = exchangeNode.y - this.GWidth
-    //         exchangeX = exchangeNode.x
-    //         exchangeY = exchangeNode.y
-    //         exchangeNode.originPosX = exchangeX
-    //         //交换位置
-    //     } else if (direction == Direction.BOTTOM) {
-    //         exchangeNode = this.allItemArr[row][colmun - 1]
-    //         SelectNode.y = SelectNode.originPosY = SelectNode.y - this.GWidth
-    //         SelectX = SelectNode.x
-    //         SelectY = SelectNode.y
-    //         SelectNode.originPosX = SelectX
-    //         exchangeNode.originPosY = exchangeNode.y = exchangeNode.y + this.GWidth
-    //         exchangeX = exchangeNode.x
-    //         exchangeY = exchangeNode.y
-    //         exchangeNode.originPosX = exchangeX
-    //     } else if (direction == Direction.LEFT) {
-    //         exchangeNode = this.allItemArr[row - 1][colmun - 2]
-    //         SelectNode.x = SelectNode.originPosX = SelectNode.x - this.GWidth
-    //         SelectX = SelectNode.x
-    //         SelectY = SelectNode.y
-    //         SelectNode.originPosY = SelectY
-    //         exchangeNode.x = exchangeNode.originPosX = exchangeNode.x + this.GWidth
-    //         exchangeX = exchangeNode.x
-    //         exchangeY = exchangeNode.y
-    //         exchangeNode.originPosY = exchangeY
-    //     } else if (direction == Direction.RIGHT) {
-    //         exchangeNode = this.allItemArr[row - 1][colmun]
-    //         SelectNode.x = SelectNode.originPosX = SelectNode.x + this.GWidth
-    //         SelectX = SelectNode.x
-    //         SelectY = SelectNode.y
-    //         SelectNode.originPosY = SelectY
-    //         exchangeNode.x = exchangeNode.originPosX = exchangeNode.x - this.GWidth
-    //         exchangeX = exchangeNode.x
-    //         exchangeY = exchangeNode.y
-    //         exchangeNode.originPosY = exchangeY
-    //     } else {
-    //         return;
-    //     }
-    //     this.reSetItemArr(row, colmun, direction)
-    //     this.setMoveTween(SelectNode, exchangeNode, SelectX, SelectY, exchangeX, exchangeY)
-    //     //移动后元素的行和列
-    //     this.judgeClear(SelectNode.row, SelectNode.colmun)
-    // }
-    /**判断消除 */
-    // private judgeClear(row: number, colmun: number) {
-    //     let rowNum = 0
-    //     let startIndex = 0
-    //     let endIndex = 0
-    //     //首次移动
-    //     /**横向判断 */
-    //     console.log(this.allItemArr);
-    //     for (let i = 0; i < Object.keys(this.allItemArr[row - 1]).length - 1; i++) {
-    //         if (this.allItemArr[row - 1][i].id == this.allItemArr[row - 1][i + 1].id) {
-    //             if (!rowNum) startIndex = i
-    //             rowNum++
-    //             if (rowNum == 2) { //三消
-    //                 endIndex = i + 1
-    //                 setTimeout(() => {
-    //                     for (let j = startIndex; j <= endIndex; j++) {
-    //                         this.allItemArr[row - 1][j].setClear(true, () => {
-    //                             this.allItemArr[row - 1][j].id = -1
-    //                             this.allItemArr[row - 1][j].node.destroy()
-    //                         })
-    //                     }
-    //                 }, 400);
-    //             }
-    //         } else {
-    //             rowNum = 0
-    //         }
-    //     }
-    //     /**纵向判断 */
-    //     let colmunNum = 0
-    //     let ColStartIndex = 0
-    //     let ColEndIndex = 0
-    //     for(let i = 0;i <this.gameRow-1;i++){
-    //         if(this.allItemArr[i][colmun-1].id == this.allItemArr[i+1][colmun-1].id){
-    //             if(!colmunNum)ColStartIndex = i
-    //             colmunNum++
-    //             if(colmunNum == 2){
-    //                 ColEndIndex = i+1
-    //                 setTimeout(()=>{
-    //                     for(let j = ColStartIndex; j <= ColEndIndex;j++){
-    //                         this.allItemArr[j][colmun-1].setClear(true,()=>{
-    //                             this.allItemArr[j][colmun-1].id = -1
-    //                             this.allItemArr[j][colmun-1].node.destroy()
-    //                         })
-    //                     }
-    //                 },400)
-    //                     setTimeout(() => {
-    //                         this.BlockDown(row,colmun)
-    //                     },1000);
-    //             }
-    //         }else{
-    //             colmunNum = 0
-    //         }
-    //     }
-    // }
-    //消除后方块下降
-    // private BlockDown(row:number,colmun:number){
-    //     //竖消掉落
-    //     let StartRow:number = 0
-    //     let EndRow:number = 0
-    //     for(let i = this.gameRow-1; i >= 0;i--){
-    //         if(i==this.gameRow - 1){  //最后一行
-    //             if(this.allItemArr[i][colmun-1].node == null)EndRow = i
-    //         }else{
-    //             if(this.allItemArr[i][colmun-1].node == null && this.allItemArr[i+1][colmun-1].node!=null){
-    //                 EndRow = i
-    //             }
-    //             if(i == 0){
-    //                 if(this.allItemArr[i][colmun-1].node == null){
-    //                     StartRow = i
-    //                 }
-    //             }else{
-    //                 if(this.allItemArr[i][colmun-1].node == null && this.allItemArr[i-1][colmun-1]!= null){
-    //                     StartRow = i
-    //                 }
-    //             }
-    //         } 
-    //     }
-    //     let  num = EndRow-StartRow+1  // n消
-    //     for(let j = 0;j<StartRow;j++){
-    //         let y = this.allItemArr[j][colmun-1].node.y
-    //         cc.tween(this.allItemArr[j][colmun-1].node)
-    //         .to(0.5,{y:y-num*this.GWidth},{easing:'quadInOut'})
-    //         .call(()=>{
-    //             this.ColExchangeItem(this.allItemArr[j][colmun-1],this.allItemArr[j+num][colmun-1])
-    //         })
-    //         .start()
-    //     }
-    // }
-    //竖直掉落
-    // private ColExchangeItem(startDown,endDown){
-    //     let tempId = startDown.id
-    //     startDown.id = endDown.id
-    //     endDown.id = tempId
-    //     let tempRow = startDown.row
-    //     startDown.row = endDown.row
-    //     endDown.row = tempRow
-    //     let tempPos = startDown.originPosY
-    //     startDown.originPosY = endDown.originPosY
-    //     endDown.originPosY = tempPos
-    //     endDown.node = startDown.node
-    //     startDown.node = null
-    //     let temp = startDown
-    //     startDown = endDown
-    //     endDown = temp
-    // }
     private getRandomInt(min: number, max: number) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    // private reSetItemArr(row: number, colmun: number, direction: number) {
-    //     let exchangeNode, selectNode = null;
-    //     switch (direction) {
-    //         case Direction.UP:
-    //             exchangeNode = this.allItemArr[row - 2][colmun - 1]
-    //             selectNode = this.allItemArr[row - 1][colmun - 1]
-    //             exchangeNode.row = row
-    //             selectNode.row = row - 1
-    //             this.allItemArr[row - 1][colmun - 1] = exchangeNode
-    //             this.allItemArr[row - 2][colmun - 1] = selectNode
-    //             break;
-    //         case Direction.BOTTOM:
-    //             exchangeNode = this.allItemArr[row][colmun - 1]
-    //             selectNode = this.allItemArr[row - 1][colmun - 1]
-    //             exchangeNode.row = row
-    //             selectNode.row = row + 1
-    //             this.allItemArr[row - 1][colmun - 1] = exchangeNode
-    //             this.allItemArr[row][colmun - 1] = selectNode
-    //             break;
-    //         case Direction.LEFT:
-    //             exchangeNode = this.allItemArr[row - 1][colmun - 2]
-    //             selectNode = this.allItemArr[row - 1][colmun - 1]
-    //             exchangeNode.colmun = colmun
-    //             selectNode.colmun = colmun - 1
-    //             this.allItemArr[row - 1][colmun - 1] = exchangeNode
-    //             this.allItemArr[row - 1][colmun - 2] = selectNode
-    //             break;
-    //         case Direction.RIGHT:
-    //             exchangeNode = this.allItemArr[row - 1][colmun]
-    //             selectNode = this.allItemArr[row - 1][colmun - 1]
-    //             exchangeNode.colmun = colmun
-    //             selectNode.colmun = colmun + 1
-    //             this.allItemArr[row - 1][colmun - 1] = exchangeNode
-    //             this.allItemArr[row - 1][colmun] = selectNode
-    //             break;
-    //     }
-    // }
-
-    // private setMoveTween(SelectNode, exchangeNode, SelectX, SelectY, exchangeX, exchangeY) {
-    //     cc.tween(SelectNode.node).delay(0.1)
-    //         .to(0.3, { x: SelectX, y: SelectY }, { easing: 'quadIn' })
-    //         .start()
-    //     cc.tween(exchangeNode.node).delay(0.1)
-    //         .to(0.3, { x: exchangeX, y: exchangeY }, { easing: 'quadIn' })
-    //         .start()
-    // }
     private resize() {
         const canvasValue: any = cc.Canvas.instance;
         let frameSize = cc.view.getFrameSize();

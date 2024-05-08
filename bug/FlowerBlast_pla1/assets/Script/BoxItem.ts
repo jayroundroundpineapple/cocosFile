@@ -9,8 +9,10 @@ export default class BoxItem extends cc.Component {
     @property(cc.Node)
     private ClearSystem: cc.Node = null;
 
+    private _FirstCanClick:boolean = false
     private BoxData: any = null
-    private _id: number;
+    private _BoxId:number = null
+    private _SpriteId: number;
     private _x: number = null;
     private _y: number = null;
     private originZindex: number = null
@@ -47,29 +49,32 @@ export default class BoxItem extends cc.Component {
             }, 300);
         }
     }
-    public initItem(index: number, BoxData: any, pos: cc.Vec3, callback?: Function) {
+    public initItem(index: number, BoxData: any, pos: cc.Vec3, callback?: Function):Promise<void> {
         return new Promise((resolve, reject) => {
             cc.resources.load(`ui/icon/${BoxData.spriteIndex}`, cc.SpriteFrame, (err, spriteFrame) => {
                 if (err) {
                     reject(err)
                 } else {
+                    this._BoxId = index
+                    this._FirstCanClick = BoxData.FirstCanClick
                     this.itemNode.getComponent(cc.Sprite).spriteFrame = spriteFrame
                     this.itemNode.position = pos
                     this.BoxData = BoxData
                     this.itemNode.scale = 0.83
                     this._x = pos.x
                     this._y = pos.y
-                    this._id = BoxData.spriteIndex
+                    this._SpriteId = BoxData.spriteIndex
                     this._originPos = pos
                     this.itemNode.name = `item${index}`
                     this._row = Math.floor(index / this.gameColmun) + 1  //第n行
                     this._colmun = (index % this.gameColmun) + 1
-                    if (BoxData.FirstCanClick) {
-                        this.setOnLight()
-                    }
+                    // if (BoxData.FirstCanClick) {
+                    //     this.setOnLight()
+                    // }
                     this.itemNode.on(cc.Node.EventType.TOUCH_START, this.onMouseHandler, this)
                     callback && callback()
-                    resolve({index:index,item:this.itemNode})
+                    console.log('jayrow-colmun',this._row,this._colmun);
+                    resolve()
                 }
             })
         })
@@ -134,11 +139,23 @@ export default class BoxItem extends cc.Component {
     get originPosY() {
         return this._originPos.y
     }
-    set id(id: number) {
-        this._id = id
+    set SpriteId(index: number) {
+        this._SpriteId = index
     }
-    get id() {
-        return this._id
+    get SpriteId() {
+        return this._SpriteId
+    }
+    set BoxId(id:number){
+        this._BoxId = id
+    }
+    get BoxId(){
+        return this._BoxId
+    }
+    set FirstCanClick(flag:any){
+        this._FirstCanClick = Boolean(flag)
+    }
+    get FirstCanClick(){
+        return this._FirstCanClick
     }
     protected onDisable(): void {
 
